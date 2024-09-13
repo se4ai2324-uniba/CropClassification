@@ -7,6 +7,8 @@ Sphinx
 coverage
 awscli
 flake8
+dvc
+mlflow
 python-dotenv>=0.5.1
 
 
