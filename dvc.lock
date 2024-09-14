@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  process_data:
+    cmd: python src/data/make_dataset.py data/raw/Crop_Recommendation.csv data/processed
+    deps:
+    - path: data/raw/Crop_Recommendation.csv
+      hash: md5
+      md5: e8b82c1adace83b8b96adddcfb040862
+      size: 144866
+    - path: src/data/make_dataset.py
+      hash: md5
+      md5: 3719097950b3fe43a7c5f91a08c84e6e
+      size: 2659
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: cf3067022a8c9852705e87fd5e052f13
+      size: 43578
+    - path: data/processed/train.csv
+      hash: md5
+      md5: ca253a7338564263b82c5e432e825e68
+      size: 101363

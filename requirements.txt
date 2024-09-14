@@ -7,6 +7,10 @@ Sphinx
 coverage
 awscli
 flake8
+pandas
+numpy
+sklearn
+matplot
 dvc
 mlflow
 python-dotenv>=0.5.1
