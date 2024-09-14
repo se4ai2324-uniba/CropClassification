@@ -17,3 +17,12 @@ stages:
     outs:
       - models/model.pkl
       - models/label_encoder.pkl
+
+  evaluate:
+    cmd: python src/models/evaluate.py
+    deps:
+      - src/models/evaluate.py
+      - models/model.pkl
+      - data/processed/test.csv
+    metrics:
+      - models/metrics.json
