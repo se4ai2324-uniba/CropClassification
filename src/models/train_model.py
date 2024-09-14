@@ -3,6 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score
 import os
+import mlflow.sklearn
 import joblib
 ##function to train the model
 
@@ -13,7 +14,8 @@ def train():
 # Ensure the models directory exists
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-
+    #applying mlflow autologging
+    mlflow.sklearn.autolog()
     # Load the processed data
     train_data = pd.read_csv('data/processed/train.csv')
     
@@ -26,12 +28,13 @@ def train():
     label_encoded=label_encoder.fit_transform(y_train)
 
     # Initialize the mode
-    model = RandomForestClassifier(n_estimators=100, random_state=42, min_samples_split=5,max_depth=2)
+    model = RandomForestClassifier(n_estimators=50, random_state=42, min_samples_split=5,max_depth=2)
     
     # Train the model
     model.fit(X_train, label_encoded)
 
-
+    autolog_run = mlflow.last_active_run()
+    
     # Save the model
     
     joblib.dump(label_encoder, 'models/label_encoder.pkl')
