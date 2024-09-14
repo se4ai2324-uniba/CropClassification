@@ -1,14 +1,14 @@
 
 from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score
 import joblib
-from sklearn.metrics import classification_report
+import mlflow
 import json
 import pandas as pd
 
 '''making evalution function'''
 def evaluate():
 
-
+    mlflow.set_experiment('Crop Classification Evaluations')
     # Load the model
     model = joblib.load('models/model.pkl')
     
@@ -37,6 +37,11 @@ def evaluate():
     recall = recall_score(y_test, y_pred, average='weighted')
     f1 = f1_score(y_test, y_pred, average='weighted')
 
+    mlflow.start_run()
+        # Log metrics
+    mlflow.log_metric("precision", precision)
+    mlflow.log_metric("recall", recall)
+    mlflow.log_metric("f1_score", f1)
 
      # Print metrics
     print(f"accuracy: {accuracy}")
@@ -53,10 +58,16 @@ def evaluate():
         'recall': recall,
         'f1': f1
     }
+
+
+    mlflow.end_run()
     
-    #report = classification_report(y_test, y_pred,zero_division=0)
+
 
     # Save metrics to a JSON file
+    mlflow.sklearn.log_model(model, "model")
+
+
 
 
     with open('models/metrics.json', 'w') as f:
