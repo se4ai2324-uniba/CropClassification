@@ -1,0 +1,5 @@
+outs:
+- md5: 05cf281c050be3da4eecf3bc6e8aac1b
+  size: 3
+  hash: md5
+  path: hellos.csv
