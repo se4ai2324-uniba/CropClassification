@@ -29,8 +29,8 @@ stages:
       size: 101363
     - path: src/models/train_model.py
       hash: md5
-      md5: 40ae62a7423b1a63856beae58296a4e0
-      size: 1177
+      md5: ef90e0ef4292af109b5cb670bfa4afc4
+      size: 1309
     outs:
     - path: models/label_encoder.pkl
       hash: md5
@@ -38,8 +38,8 @@ stages:
       size: 830
     - path: models/model.pkl
       hash: md5
-      md5: a895703dc0a757ced5fedc77be6a8817
-      size: 212057
+      md5: 2a3326c5164ef489dcb7214357cccc72
+      size: 107309
   evaluate:
     cmd: python src/models/evaluate.py
     deps:
@@ -49,14 +49,14 @@ stages:
       size: 43578
     - path: models/model.pkl
       hash: md5
-      md5: a895703dc0a757ced5fedc77be6a8817
-      size: 212057
+      md5: 2a3326c5164ef489dcb7214357cccc72
+      size: 107309
     - path: src/models/evaluate.py
       hash: md5
-      md5: bee9cdc9c5ffb2b28ddfaa8f66fae829
-      size: 1763
+      md5: 7828c5e20bf050d3a685aa754d3fa20a
+      size: 1970
     outs:
     - path: models/metrics.json
       hash: md5
-      md5: 14a3da1916d543407a8705de02458cea
+      md5: cf7db9a029393354b848e1c490482871
       size: 121
