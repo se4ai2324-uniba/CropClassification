@@ -2,15 +2,21 @@
 from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score
 import joblib
 import mlflow
+import dagshub
 import json
 import pandas as pd
 
 '''making evalution function'''
 def evaluate():
+    dagshub.init(repo_owner='ushafique', repo_name='CropClassification', mlflow=True)
 
     mlflow.set_experiment('Crop Classification Evaluations')
     # Load the model
+    mlflow.start_run()
     model = joblib.load('models/model.pkl')
+
+    mlflow.sklearn.log_model(model, "model")
+
     
     # Load the test data
     test_data = pd.read_csv('data/processed/test.csv')
@@ -37,7 +43,7 @@ def evaluate():
     recall = recall_score(y_test, y_pred, average='weighted')
     f1 = f1_score(y_test, y_pred, average='weighted')
 
-    mlflow.start_run()
+  
         # Log metrics
     mlflow.log_metric("precision", precision)
     mlflow.log_metric("recall", recall)
@@ -65,7 +71,7 @@ def evaluate():
 
 
     # Save metrics to a JSON file
-    mlflow.sklearn.log_model(model, "model")
+
 
 
 
@@ -74,5 +80,6 @@ def evaluate():
         json.dump(metrics, f)
         
     return metrics
+
 if __name__ == '__main__':
     evaluate()
