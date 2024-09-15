@@ -4,6 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score
 import os
 import mlflow.sklearn
+import dagshub
 import joblib
 ##function to train the model
 
@@ -14,6 +15,9 @@ def train():
 # Ensure the models directory exists
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+
+    dagshub.init(repo_owner='ushafique', repo_name='CropClassification', mlflow=True)
+
     #applying mlflow autologging
     mlflow.sklearn.autolog()
     # Load the processed data
