@@ -9,28 +9,28 @@ stages:
       size: 144866
     - path: src/data/make_dataset.py
       hash: md5
-      md5: 3719097950b3fe43a7c5f91a08c84e6e
-      size: 2659
+      md5: 754c28c3a05904627b994494f8532f2a
+      size: 2266
     outs:
     - path: data/processed/test.csv
       hash: md5
-      md5: cf3067022a8c9852705e87fd5e052f13
-      size: 43578
+      md5: b463ad3a7428f58c3334206831eeaf52
+      size: 29079
     - path: data/processed/train.csv
       hash: md5
-      md5: ca253a7338564263b82c5e432e825e68
-      size: 101363
+      md5: c346797cb54b71d98acddb28a3f5324b
+      size: 115862
   train_model:
     cmd: python src/models/train_model.py
     deps:
     - path: data/processed/train.csv
       hash: md5
-      md5: ca253a7338564263b82c5e432e825e68
-      size: 101363
+      md5: c346797cb54b71d98acddb28a3f5324b
+      size: 115862
     - path: src/models/train_model.py
       hash: md5
-      md5: ef90e0ef4292af109b5cb670bfa4afc4
-      size: 1309
+      md5: 37a7c7f95b76445e4b19bbe7e6cb3ae3
+      size: 1729
     outs:
     - path: models/label_encoder.pkl
       hash: md5
@@ -38,25 +38,25 @@ stages:
       size: 830
     - path: models/model.pkl
       hash: md5
-      md5: 2a3326c5164ef489dcb7214357cccc72
-      size: 107309
+      md5: 81c315c64fcfe80cd0c98a97213a0b63
+      size: 104909
   evaluate:
     cmd: python src/models/evaluate.py
     deps:
     - path: data/processed/test.csv
       hash: md5
-      md5: cf3067022a8c9852705e87fd5e052f13
-      size: 43578
+      md5: b463ad3a7428f58c3334206831eeaf52
+      size: 29079
     - path: models/model.pkl
       hash: md5
-      md5: 2a3326c5164ef489dcb7214357cccc72
-      size: 107309
+      md5: 81c315c64fcfe80cd0c98a97213a0b63
+      size: 104909
     - path: src/models/evaluate.py
       hash: md5
-      md5: 7828c5e20bf050d3a685aa754d3fa20a
-      size: 1970
+      md5: 4b98acd0befc3dd9286ab3bc9f186604
+      size: 2556
     outs:
     - path: models/metrics.json
       hash: md5
-      md5: cf7db9a029393354b848e1c490482871
-      size: 121
+      md5: a7906d157ef457e7aaf923b9249ab793
+      size: 95
