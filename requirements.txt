@@ -10,6 +10,7 @@ flake8
 pandas
 numpy
 sklearn
+fastapi
 matplot
 dvc
 mlflow
