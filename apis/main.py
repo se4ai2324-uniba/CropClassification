@@ -1,14 +1,12 @@
 
 # apis with endpoints predict to predict models
-
+from fastapi import FastAPI,HTTPException, status
 import json
 from typing import Dict
-from fastapi.responses import JSONResponse
 import joblib
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from .schemas import CropFeatures, PerformanceMetrics, PredictionResponse
-from fastapi import FastAPI,HTTPException, status
 from pydantic import BaseModel
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
@@ -92,6 +90,7 @@ def predict(crop_input: CropFeatures):
 
             return PredictionResponse(
                 predicted=predicted_crop,
+                input_data=crop_input,
 
             )
     except Exception as e:
@@ -110,3 +109,6 @@ async def model_info():
             "max_depth": model.max_depth
         }
 
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
