@@ -27,4 +27,5 @@ class PerformanceMetrics(BaseModel):
 # Definet the Prediction Response
 class PredictionResponse(BaseModel):
     predicted: str
+    input_data: CropFeatures
     message: str = "Prediction successful"
