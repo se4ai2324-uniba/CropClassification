@@ -28,7 +28,7 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint **/*.py --disable=C,R
+          pylint --rcfile=.pylintrc **/*.py
 
       - name: Run flake8
         run: |
