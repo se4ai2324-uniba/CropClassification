@@ -1,0 +1,10 @@
+[flake8]
+# Disable specific error codes
+ignore = E501, W503
+
+# Exclude specific directories
+exclude = .git,__pycache__,build,dist
+
+# Set max line length
+max-line-length = 88
+
