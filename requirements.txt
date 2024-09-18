@@ -14,6 +14,25 @@ flake8
 dvc
 mlflow
 httpx
+dagshub
+dagshub-annotation-converter
+databricks-sdk
+dataclasses-json
+Deprecated
+diskcache
+distro
+dnspython
+docker
+dvc
+dvc-data
+dvc-gdrive
+dvc-http
+dvc-objects
+dvc-render
+dvc-s3
+dvc-studio-client
+dvc-task
+
 # python-dotenv>=0.5.1
 
 
