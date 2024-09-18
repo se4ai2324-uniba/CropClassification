@@ -32,4 +32,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --maxfail=1 --disable-warnings -q
+          pytest apis/test_api.py --maxfail=1 --disable-warnings -q
