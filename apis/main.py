@@ -51,21 +51,17 @@ def get_summary():
 
 
 # Load the model and label encoder
-def load_model():
-    """
-    Load the trained model and label encoder.
-    """
-    try:
+# def load_model:
+#     """
+#     Load the trained model and label encoder.
+#     """
+#     try:
+model = joblib.load('models/model.pkl')
+label_encoder = joblib.load('models/label_encoder.pkl')
+    # except FileNotFoundError:
+logger.error("Model file not found. Please train the model first.")
 
-        model = joblib.load('models/model.pkl')
-        label_encoder = joblib.load('models/label_encoder.pkl')
-        return model, label_encoder
-    except FileNotFoundError:
-        logger.error("Model file not found. Please train the model first.")
-
-model, label_encoder = load_model()
-if model is None or label_encoder is None:
-    raise Exception("Model and label encoder not found. Please train the model first.")
+#model, label_encoder = load_model()
 
 
 # Define performance endpoint
