@@ -50,3 +50,7 @@ def test_evaluate():
     for key, value in metrics.items():
         assert isinstance(value, float), f"ValueError: {value} is not a float"
 
+
+if __name__ == "__main__":
+    pytest.main()
+
