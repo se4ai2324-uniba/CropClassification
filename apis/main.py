@@ -64,6 +64,8 @@ def load_model():
         logger.error("Model file not found. Please train the model first.")
 
 model, label_encoder = load_model()
+if model is None or label_encoder is None:
+    raise Exception("Model and label encoder not found. Please train the model first.")
 
 
 # Define performance endpoint
