@@ -9,6 +9,7 @@ pandas
 scikit-learn
 joblib
 pylint
+pytest
 flake8
 dvc
 mlflow
