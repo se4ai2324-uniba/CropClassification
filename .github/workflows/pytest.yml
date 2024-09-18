@@ -29,6 +29,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Pull data with DVC
+        run: |
+          pip install dvc
+          dvc pull
+
+      - name: Run tests
+        run: |
+          pytest apis/test_api.py
+
       # Step 4: Run tests
       - name: Run unit tests
         run: |
