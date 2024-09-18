@@ -1,21 +1,19 @@
 # local package
--e .
+#-e .
 
 # external requirements
-click
-Sphinx
-coverage
-awscli
-flake8
-pandas
-numpy
-sklearn
 fastapi
-matplot
+uvicorn
+numpy
+pandas
+scikit-learn
+joblib
+pylint
+flake8
 dvc
 mlflow
-python-dotenv>=0.5.1
+# python-dotenv>=0.5.1
 
 
 # backwards compatibility
-pathlib2
+#pathlib2
