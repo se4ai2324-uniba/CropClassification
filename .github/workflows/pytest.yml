@@ -31,14 +31,9 @@ jobs:
 
       - name: Pull data with DVC
         run: |
-          pip install dvc
+          pip install dvc[s3]
           dvc pull
 
       - name: Run tests
-        run: |
-          pytest apis/test_api.py
-
-      # Step 4: Run tests
-      - name: Run unit tests
         run: |
           pytest apis/test_api.py
