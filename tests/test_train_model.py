@@ -33,3 +33,7 @@ def test_train_model():
 
     # Ensure the model is trained
     assert model is not None
+
+
+if __name__ == "__main__":
+    pytest.main()
