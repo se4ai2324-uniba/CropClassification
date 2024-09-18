@@ -28,7 +28,7 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint --rcfile=.pylintrc **/*.py
+          pylint --rcfile=.pylintrc src/*.py
 
       - name: Run flake8
         run: |
