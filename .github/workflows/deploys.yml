@@ -39,6 +39,11 @@ jobs:
         run: |
           docker build -t crop-classification-apis .
 
+      - name: Pull data with DVC
+        run: |
+          pip install dvc[s3]
+          dvc pull
+
       - name: Run Tests
         run: |
           docker run --rm crop-classification-apis pytest apis/test_api.py
