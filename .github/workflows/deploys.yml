@@ -60,4 +60,4 @@ jobs:
       - name: Push Docker image
         run: |
           docker tag crop-classification-apis:latest ${{ secrets.DOCKER_USERNAME }}/crop-classification
-          docker push ${{ secrets.DOCKER_USERNAME }}/crop-classification-apis:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/crop-classifications:latest
