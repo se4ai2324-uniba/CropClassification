@@ -37,7 +37,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-        docker build -t crop-classification .
+        docker build -t crop-classification-apis .
 
       - name: Run Tests
         run: |
