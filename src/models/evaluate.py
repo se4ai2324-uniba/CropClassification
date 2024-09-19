@@ -13,6 +13,7 @@ import joblib
 import mlflow
 import dagshub
 import pandas as pd
+from codecarbon import EmissionsTracker
 
 
 def evaluate():
@@ -43,15 +44,24 @@ def evaluate():
 
     label_encoder = joblib.load('models/label_encoder.pkl')
 
+    # Initialize emissions tracker
+    tracker = EmissionsTracker()
+
+    tracker.start()
+
     # Make predictions
     y_pred_encoded = model.predict(X_test)
 
+    emissions = tracker.stop()
     # Convert predictions back to original labels
     y_pred = label_encoder.inverse_transform(y_pred_encoded)
     # Calculate evaluation metrics
 
     # Make predictions
     # y_pred = model.predict(X_test)
+    with open('reports/evaluate_emissions_report.txt', 'w') as f:
+        f.write(f"Estimated Carbon Emission for Model Training: {emissions:.5f} kg CO2\n")
+        f.write(f"Estimated Energy Consumption for Model Training: {emissions * 0.000055}\n")
 
     accuracy = accuracy_score(y_test, y_pred)
     precision = precision_score(y_test,

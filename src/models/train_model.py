@@ -11,6 +11,8 @@ from sklearn.preprocessing import LabelEncoder
 import mlflow.sklearn
 import dagshub
 import joblib
+from codecarbon import EmissionsTracker
+
 
 # function to train the model
 
@@ -49,6 +51,10 @@ def train():
     label_encoder = LabelEncoder()
     label_encoded = label_encoder.fit_transform(y_train)
 
+    # Initialize emissions tracker
+    tracker = EmissionsTracker()
+
+    tracker.start()
     # Initialize the mode
     model = RandomForestClassifier(
         n_estimators=50,
@@ -58,6 +64,14 @@ def train():
 
     # Train the model
     model.fit(X_train, label_encoded)
+
+    emissions = tracker.stop()
+
+
+    # Save the emissions report to in text file
+    with open('reports/train_model_emissions_report.txt', 'w') as f:
+        f.write(f"Estimated Carbon Emission for Model Training: {emissions:.5f} kg CO2\n")
+        f.write(f"Estimated Energy Consumption for Model Training: {emissions * 0.000055}\n")
 
     # Save the model
 
