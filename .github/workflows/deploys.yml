@@ -51,13 +51,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t crop-classification-apis .
+          docker build -t crop-classification-apis:latest .
 
       - name: Run Tests
         run: |
-          docker run --rm crop-classification-apis pytest apis/test_api.py
+          docker run --rm crop-classification-apis:latest pytest apis/test_api.py
 
       - name: Push Docker image
         run: |
-          docker tag crop-classification ${{ secrets.DOCKER_USERNAME }}/crop-classification
-          docker push ${{ secrets.DOCKER_USERNAME }}/crop-classification
+          docker tag crop-classification-apis:latest ${{ secrets.DOCKER_USERNAME }}/crop-classification
+          docker push ${{ secrets.DOCKER_USERNAME }}/crop-classification-apis:latest
