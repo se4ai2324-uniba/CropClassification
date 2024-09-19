@@ -41,7 +41,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          docker run --rm crop-classification pytest apis/test_api.py
+          docker run --rm crop-classification-apis pytest apis/test_api.py
 
       - name: Push Docker image
         run: |
