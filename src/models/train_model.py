@@ -65,6 +65,11 @@ def train():
     # Train the model
     model.fit(X_train, label_encoded)
 
+    # Save the model
+    joblib.dump(label_encoder, 'models/label_encoder.pkl')
+    joblib.dump(model, output_file)
+    print("Model saved to: models/model.pkl")
+
     emissions = tracker.stop()
 
 
@@ -72,11 +77,6 @@ def train():
     with open('reports/train_model_emissions_report.txt', 'w') as f:
         f.write(f"Estimated Carbon Emission for Model Training: {emissions:.5f} kg CO2\n")
         f.write(f"Estimated Energy Consumption for Model Training: {emissions * 0.000055}\n")
-
-    # Save the model
-
-    joblib.dump(label_encoder, 'models/label_encoder.pkl')
-    joblib.dump(model, output_file)
 
 
 if __name__ == "__main__":
