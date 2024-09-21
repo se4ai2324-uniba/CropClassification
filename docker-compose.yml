@@ -1,13 +1,18 @@
-version: "3.9"
+version: "3"
 
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "5000:8000"
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
     volumes:
-      - .:/app
-    environment:
-      - ENV=development
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml # Mount your configuration file
+    ports:
+      - "9090:9090" # Expose Prometheus dashboard
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000" # Expose Grafana dashboard
+    depends_on:
+      - prometheus
