@@ -6,10 +6,13 @@ from typing import Dict
 import joblib
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
+from prometheus_client import Counter, Summary
 from .schemas import CropFeatures, PerformanceMetrics, PredictionResponse
 from pydantic import BaseModel
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
+from prometheus_fastapi_instrumentator import Instrumentator
+
 import logging
 
 app = FastAPI()
@@ -22,14 +25,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Set up logging
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Initialize Prometheus Instrumentator
+instrumentator = Instrumentator()
+instrumentator.instrument(app).expose(app)
+
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+REQUEST_COUNT = Counter('request_count', 'Total number of requests received')
+
 data = pd.read_csv('data/raw/Crop_Recommendation.csv')
 
-
+try:
+    model = joblib.load('models/model.pkl')
+    label_encoder = joblib.load('models/label_encoder.pkl')
+    print("Model loaded successfully.")
+except FileNotFoundError:
+    print("Model file not found. Please train the model first.")
+    raise
 # Root endpoint
 @app.get("/", tags=["Root"])
+@REQUEST_TIME.time()
 def read_root():
 
     """
@@ -37,11 +55,12 @@ def read_root():
     """
     return {"message": "Welcome to the Crop Classification API!",
             "name": "Crop Classification API",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "github": " https://github.com/se4ai2324-uniba/CropClassification.git"}
 
 # Data summary endpoint
 @app.get("/summary/",status_code=status.HTTP_200_OK, description="Get summary statistics of the dataset.")
+@REQUEST_TIME.time()
 def get_summary():
     """
     Get summary statistics of the dataset.
@@ -51,16 +70,6 @@ def get_summary():
 
 
 # Load the model and label encoder
-# def load_model:
-#     """
-#     Load the trained model and label encoder.
-#     """
-#     try:
-model = joblib.load('models/model.pkl')
-label_encoder = joblib.load('models/label_encoder.pkl')
-    # except FileNotFoundError:
-logger.error("Model file not found. Please train the model first.")
-
 #model, label_encoder = load_model()
 
 
@@ -106,6 +115,7 @@ async def model_info():
             "min_samples_split": model.min_samples_split,
             "max_depth": model.max_depth
         }
+    REQUEST_COUNT.inc()
 
 if __name__ == "__main__":
     import uvicorn
