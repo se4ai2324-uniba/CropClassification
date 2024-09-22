@@ -109,3 +109,15 @@ The model was evaluated on the test set using the following metrics:
 
 - **Fairness**: Ensure that the model does not disproportionately benefit or disadvantage certain groups (e.g., small-scale farmers, certain regions).
 - **Data Privacy**: Use anonymized data if deploying in a real-world setting to protect personal or sensitive information.
+
+## Code Carbon
+
+We use Code Carbon to monitor the environmental impact of running our machine learning models. Below, we present a detailed overview of the carbon emissions and energy consumption associated with specific model executions.
+
+| Timestamp           | Project Name | Duration          | Emissions              | Emissions Rate         | CPU Power | GPU Power | RAM Power         |
+| ------------------- | ------------ | ----------------- | ---------------------- | ---------------------- | --------- | --------- | ----------------- | --------------------- |
+| 2024-09-19T19:09:24 | codecarbon   | 14.24550829999498 | 1.7599366653232822e-05 | 1.2354326909654057e-06 | 7.5       | 0.0       | 5.955403804779053 | 2.967380291665904e-05 |
+
+![plots](reports/codecarbon/carbons_dashboard.PNG)
+
+![plots](reports/codecarbon/carbons_dashboard2.PNG)
