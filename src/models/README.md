@@ -118,6 +118,8 @@ We use Code Carbon to monitor the environmental impact of running our machine le
 | ------------------- | ------------ | ----------------- | ---------------------- | ---------------------- | --------- | --------- | ----------------- | --------------------- |
 | 2024-09-19T19:09:24 | codecarbon   | 14.24550829999498 | 1.7599366653232822e-05 | 1.2354326909654057e-06 | 7.5       | 0.0       | 5.955403804779053 | 2.967380291665904e-05 |
 
+![plots](reports/codecarbon/carbons_dashboards1.png)
+
 ![plots](reports/codecarbon/carbons_dashboard.PNG)
 
 ![plots](reports/codecarbon/carbons_dashboard2.PNG)
